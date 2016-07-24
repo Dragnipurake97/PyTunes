@@ -29,13 +29,13 @@ class Window(QtGui.QWidget):
         
         hbox = QtGui.QHBoxLayout()
         self.setLayout(hbox)
-
+        
         self.setGeometry(300, 300, 100, 100)
         self.setWindowTitle("PyTunes")
         self.show()
 
-    def playMusic(self):
-        
+
+    def playMusic(self):        
         if pygame.mixer.get_init() == None:
             QtGui.QMessageBox.about(self, "No music loaded", "No music loaded")
         elif pygame.mixer.music.get_busy() == True and self.is_paused == False:
@@ -46,7 +46,7 @@ class Window(QtGui.QWidget):
             pygame.mixer.music.unpause()
             self.play_btn.setText("Pause")
             self.is_paused = False
-        print(self.is_paused)
+
 
     def loadMusic(self):
         name = QtGui.QFileDialog.getOpenFileName(self, "Choose Song")
@@ -58,7 +58,8 @@ class Window(QtGui.QWidget):
 
 
     def close_application(self):
-        choice = QtGui.QMessageBox.question(self, "Quit", "Would you like to quit?",
+        choice = QtGui.QMessageBox.question(self, "Quit",
+                                           "Would you like to quit?",
                                            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
 
         if choice == QtGui.QMessageBox.Yes:
@@ -70,6 +71,6 @@ class Window(QtGui.QWidget):
 def run():
     app = QtGui.QApplication(sys.argv)
     GUI = Window()
-    
     sys.exit(app.exec_())
+
 run()
